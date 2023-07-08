@@ -9,7 +9,9 @@ app.use(express.static('client'));
 io.on('connection', (socket) => {
   console.log('User connected');
 
-  socket.on('disconnect', () => console.log('User disconnected'));
+  socket.on('msg', (msg) => {
+    io.emit('msg', msg);
+  });
 });
 
 server.listen(3000, () => console.log('Listening to the port 3000'));
